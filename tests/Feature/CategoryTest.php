@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Models\Category;
+use COM;
 use Database\Seeders\CategorySeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -63,5 +64,24 @@ class CategoryTest extends TestCase
 
         $result = $category->update();
         self::assertTrue($result);
+    }
+
+    public function testSelect()
+    {
+        for($i = 0; $i < 5; $i++) {
+            $category = new Category();
+            $category->id = "$i";
+            $category->name = "Category $i";
+            $category->save();
+        }
+
+        $categories = Category::whereNull("description")->get();
+        self::assertEquals(5, $categories->count());
+        $categories->each(function ($category) {
+            self::assertNull($category->description);
+
+            $category->description = "updated";
+            $category->update();
+        });
     }
 }
