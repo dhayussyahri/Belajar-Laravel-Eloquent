@@ -3,3 +3,4 @@ use belajar_laravel_eloquent;
 show tables;
 
 SELECT * FROM categories;
+SELECT * FROM vouchers;
