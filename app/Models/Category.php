@@ -13,4 +13,10 @@ class Category extends Model
     public $incrementing = false;
     public $timestamps = false;
 
+    protected $fillable = [
+        // mengizinkan kolom kolom mana saja yg dapat diubah
+        "id",
+        "name",
+        "description"
+    ];
 }
