@@ -4,3 +4,5 @@ show tables;
 
 SELECT * FROM categories;
 SELECT * FROM vouchers;
+SELECT * FROM comments;
+DESCRIBE comments;
