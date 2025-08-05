@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\Scopes\isActiveScope;
 use COM;
 use Database\Seeders\CategorySeeder;
+use Database\Seeders\ProductSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
@@ -202,5 +203,20 @@ class CategoryTest extends TestCase
 
         $category = Category::withoutGlobalScopes([isActiveScope::class])->find("FOOD");
         self::assertNotNull($category);
+    }
+
+    public function testOneToMany()
+    {
+        $this->seed([CategorySeeder::class, ProductSeeder::class]);
+
+        $category = Category::find("FOOD");
+        self::assertNotNull($category);
+
+        // $product = Product::where("category_id", $category->id)->get();
+        $products = $category->products;
+
+        self::assertNotNull($products);
+        self::assertCount(1, $products);
+
     }
 }
