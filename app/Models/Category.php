@@ -7,6 +7,7 @@ use App\Models\Scopes\isActiveScope;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Support\Facades\Hash;
 
@@ -36,7 +37,7 @@ class Category extends Model
 
     }
     // product yg paling mahal
-    public function mostExpensiveProducet():HasOne
+    public function mostExpensiveProduct():HasOne
     {
         return $this->hasOne(Product::class, "category_id", "id")->latest("price");
     }
@@ -46,4 +47,16 @@ class Category extends Model
         self::addGlobalScope(new isActiveScope());
     }
 
+    public function reviews():HasManyThrough
+    {
+        return $this->hasManyThrough(
+            Review::class,
+            Product::class,
+            "category_id", // FK on products table
+            "product_id", // FK on reviews table
+            "id", // PK on categories table
+            "id" // PK on products table
+        );
+
+    }
 }
