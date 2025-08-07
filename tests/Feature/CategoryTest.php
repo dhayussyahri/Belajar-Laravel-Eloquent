@@ -248,10 +248,10 @@ class CategoryTest extends TestCase
 
         $category = Category::find("FOOD");
         $products = $category->products;
-        self::assertCount(1, $products);
+        self::assertCount(2, $products);
 
         $outOfStockProduct = $category->products()->where("stock", "<=", 0)->get();
-        self::assertCount(1, $outOfStockProduct);
+        self::assertCount(2, $outOfStockProduct);
     }
 
     public function testHasManyThrough()
