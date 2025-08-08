@@ -5,10 +5,13 @@ namespace Tests\Feature;
 use App\Models\wallet;
 use Tests\TestCase;
 use App\Models\Customer;
+use App\Models\Image;
+use App\Models\Product;
 use App\Models\VirtualAccount;
 use Database\Seeders\CategorySeeder;
 use Database\Seeders\WalletSeeder;
 use Database\Seeders\CustomerSeeder;
+use Database\Seeders\ImageSeeder;
 use Database\Seeders\ProductSeeder;
 use Database\Seeders\VirtualAccountSeeder;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -134,4 +137,19 @@ class CustomerTest extends TestCase
 
         }
     }
+
+    public function testOneToOnePolyMorphic()
+    {
+        $this->seed([CustomerSeeder::class, ImageSeeder::class]);
+
+        $customer = Customer::find("DHAYUS");
+        self::assertNotNull($customer);
+
+        $image = $customer->image;
+        self::assertNotNull($image);
+
+        self::assertEquals("http://www.haiiyusss.com/image/1.jpg", $image->url);
+    }
+
+
 }
