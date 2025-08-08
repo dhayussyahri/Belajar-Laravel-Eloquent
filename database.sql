@@ -6,3 +6,4 @@ SELECT * FROM categories;
 SELECT * FROM vouchers;
 SELECT * FROM comments;
 DESCRIBE comments;
+SELECT * FROM customers_likes_products;
