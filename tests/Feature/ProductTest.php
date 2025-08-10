@@ -9,9 +9,12 @@ use App\Models\Customer;
 use Database\Seeders\ImageSeeder;
 use Database\Seeders\ProductSeeder;
 use Database\Seeders\CategorySeeder;
+use Database\Seeders\CommentSeeder;
 use Database\Seeders\CustomerSeeder;
+use Database\Seeders\VoucherSeeder;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use PDO;
 
 class ProductTest extends TestCase
 {
@@ -55,4 +58,19 @@ class ProductTest extends TestCase
 
         self::assertEquals("http://www.haiiyusss.com/image/2.jpg", $image->url);
     }
+
+    public function testOneToManyPolyMorphic()
+    {
+        $this->seed([CategorySeeder::class, ProductSeeder::class, VoucherSeeder::class, CommentSeeder::class]);
+
+        $product = Product::find("1");
+        self::assertNotNull($product);
+
+        $comments = $product->comments;
+        foreach($comments as $comment) {
+            self::assertEquals(Product::class, $comment->commentable_type);
+            self::assertEquals($product->id, $comment->commentable_id);
+        }
+    }
+    
 }
