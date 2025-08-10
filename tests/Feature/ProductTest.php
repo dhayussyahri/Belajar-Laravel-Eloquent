@@ -6,11 +6,14 @@ use Tests\TestCase;
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\Customer;
+use App\Models\Tag;
+use App\Models\Voucher;
 use Database\Seeders\ImageSeeder;
 use Database\Seeders\ProductSeeder;
 use Database\Seeders\CategorySeeder;
 use Database\Seeders\CommentSeeder;
 use Database\Seeders\CustomerSeeder;
+use Database\Seeders\TagSeeder;
 use Database\Seeders\VoucherSeeder;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -84,5 +87,25 @@ class ProductTest extends TestCase
         $oldestComment = $product->oldestComment;
         self::assertNotNull($oldestComment);
 
+    }
+
+    public function testManyToManyPolyMorphic()
+    {
+        $this->seed([CategorySeeder::class, ProductSeeder::class, VoucherSeeder::class, TagSeeder::class]);
+
+        $product = Product::find("1");
+        $tags = $product->tags;
+        self::assertNotNull($tags);
+        self::assertCount(1, $tags);
+
+        foreach( $tags as $tag){
+            self::assertNotNull($tag->id);
+            self::assertNotNull($tag->name);
+
+            $vouchers = $tag->vouchers;
+            self::assertNotNull($vouchers);
+            self::assertCount(1, $vouchers);
+
+        }
     }
 }
