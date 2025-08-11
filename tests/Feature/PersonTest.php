@@ -25,4 +25,20 @@ class PersonTest extends TestCase
         self::assertEquals("Morro", $person->last_name);
 
     }
+    public function testPersonToUpper()
+    {
+        $person = new Person();
+        $person->first_name = "Dhayus";
+        $person->last_name = "Syahri";
+        $person->save();
+
+        self::assertEquals("DHAYUS Syahri", $person->fullName);
+
+        $person->fullName = "Joko Morro";
+        $person->save();
+
+        self::assertEquals("JOKO", $person->first_name);
+        self::assertEquals("Morro", $person->last_name);
+
+    }
 }
