@@ -19,6 +19,8 @@ class Customer extends Model
     public $incrementing = false;
     public $timestamps = false;
 
+    protected $with = ["wallet"];
+
     public function wallet():HasOne
     {
         return $this->hasOne(wallet::class, "customer_id", "id");
