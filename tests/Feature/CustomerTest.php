@@ -107,7 +107,7 @@ class CustomerTest extends TestCase
     {
         $this->testManyToMany();
 
-        $customer = Customer::find("DHAYUS");
+        $customer = Customer::find("Dhayus");
         $products = $customer->likesProductsLastWeek;
 
         foreach($products as $product) {

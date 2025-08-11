@@ -45,7 +45,7 @@ class ProductTest extends TestCase
         self::assertNotNull($cheapestProduct);
         self::assertEquals("1", $cheapestProduct->id);
 
-        $mostExpensiveProduct = $category->mostExpensiveProducet;
+        $mostExpensiveProduct = $category->mostExpensiveProduct;
         self::assertNotNull($mostExpensiveProduct);
         self::assertEquals("2", $mostExpensiveProduct->id);
     }
@@ -72,7 +72,7 @@ class ProductTest extends TestCase
 
         $comments = $product->comments;
         foreach($comments as $comment) {
-            self::assertEquals(Product::class, $comment->commentable_type);
+            self::assertEquals('product', $comment->commentable_type);
             self::assertEquals($product->id, $comment->commentable_id);
         }
     }
