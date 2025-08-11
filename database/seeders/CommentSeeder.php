@@ -27,7 +27,7 @@ class CommentSeeder extends Seeder
         $comment->email = "dhayus@gmail.com";
         $comment->title = "Title";
         $comment->commentable_id = $product->id;
-        $comment->commentable_type = Product::class;
+        $comment->commentable_type = 'product';
         $comment->save();
     }
     public function createCommentsForVoucher():void
@@ -38,7 +38,7 @@ class CommentSeeder extends Seeder
         $comment->email = "dhayus@gmail.com";
         $comment->title = "Title";
         $comment->commentable_id = $voucher->id;
-        $comment->commentable_type = Voucher::class;
+        $comment->commentable_type = 'voucher';
         $comment->save();
 
     }
