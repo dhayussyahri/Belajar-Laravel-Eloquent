@@ -8,3 +8,4 @@ SELECT * FROM comments;
 DESCRIBE comments;
 SELECT * FROM customers_likes_products;
 SELECT * FROM images;
+SELECT * FROM persons;
