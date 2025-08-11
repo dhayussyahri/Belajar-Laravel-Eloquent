@@ -18,6 +18,9 @@ class Category extends Model
     protected $keyType = "string";
     public $incrementing = false;
     public $timestamps = false;
+    protected $casts = [
+        'created_at' => 'datetime:U'
+    ];
 
     protected $fillable = [
         // mengizinkan kolom kolom mana saja yg dapat diubah
