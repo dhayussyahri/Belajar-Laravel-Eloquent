@@ -9,3 +9,4 @@ DESCRIBE comments;
 SELECT * FROM customers_likes_products;
 SELECT * FROM images;
 SELECT * FROM persons;
+SELECT * FROM employees;
